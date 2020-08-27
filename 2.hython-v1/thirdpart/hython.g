@@ -1,5 +1,4 @@
-grammar ExprCppTree;
- 
+grammar hython;
 options {
     language = C;
     output = AST;
@@ -15,7 +14,7 @@ options {
  
 expr: multExpr ((PLUS^ | MINUS^) multExpr)*
     ;
- 
+
 PLUS: '+';
 MINUS: '-';
  
@@ -32,6 +31,10 @@ atom: INT
     | '('! expr ')'!
     ;
 
+
+
+
+
 defid_sub: ID
     | ID^ ASSIGN! expr;
 defid: DEF^ defid_sub (','! defid_sub)* ';'!
@@ -46,7 +49,7 @@ BLOCK: '__block__';
 stmt: expr ';' NEWLINE -> expr  // tree rewrite syntax
     | ID ASSIGN expr ';' NEWLINE -> ^(ASSIGN ID expr) // tree notation
     | defid NEWLINE -> defid
-    | block NEWLINE -> block
+    | block
     | NEWLINE ->   // ignore
     ;
  
@@ -54,14 +57,11 @@ ASSIGN: '=';
  
 prog
     : (stmt {
-        #ifdef DEBUG
-            do {
-                pANTLR3_STRING s = $stmt.tree->toStringTree($stmt.tree);
-                if (s->chars == NULL) break;
-                assert(s->chars);
-                printf(" haizei tree \%s\n", s->chars);
-                fflush(stdout);
-            } while (0);
+        #ifdef INFOMSG
+        pANTLR3_STRING s = $stmt.tree->toStringTree($stmt.tree);
+             assert(s->chars);
+             printf(" haizei tree \%s\n", s->chars);
+            fflush(stdout);
         #endif    
         }
         )+
