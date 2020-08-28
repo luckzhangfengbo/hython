@@ -6,7 +6,11 @@
     {
         def d = a + 12;
         a = 500;
+        def yes = 6666;
         def a = 10000;
+        if (a >= 2) {
+            print yes;
+        }
         def e = a + 12;
         a = 1000;
         def g = a + 20;
