@@ -13,14 +13,14 @@
 #include <string>
 
 namespace haizei {
-
+//抽象语法书
 class ASTNode {
 public :
     ASTNode(const char *file_name);
     ASTNode(pANTLR3_BASE_TREE);
-    int size();
-    std::string text();
-    ASTNode operator[](int);
+    int size();//子节点的数量
+    std::string text();//返回当前节点的字符串信息
+    ASTNode operator[](int);//当前节点的第i个子孩子
     bool hasToken();
     int type();
     void destroy();
