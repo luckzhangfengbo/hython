@@ -13,7 +13,7 @@
 #include <string>
 
 namespace haizei {
-//抽象语法书
+//抽象语法树
 class ASTNode {
 public :
     ASTNode(const char *file_name);
